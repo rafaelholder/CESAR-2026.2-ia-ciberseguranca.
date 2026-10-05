@@ -20,6 +20,10 @@ O notebook treina um Random Forest para separar executáveis Windows benignos de
 
 **COMO fiz.** Calculei `10·FN + 1·FP` na validação para cada limiar entre 0,05 e 0,95 (passo 0,01), escolhi o mínimo e plotei a curva de custo marcando os dois limiares. Depois fiz uma análise de sensibilidade com razões FN:FP de 1, 2, 5, 10 e 20. Os limiares ótimos foram 0,24, 0,14, 0,09, 0,07 e 0,07.
 
+![Curva de custo na validação](curva_custo_av1.png)
+
+*Figura 1 — Custo total (10·FN + 1·FP) na validação para cada limiar. Cinza: regra da aula (0,37). Vermelho: mínimo custo (0,07).*
+
 **POR QUE fiz.** Num antivírus os erros não custam o mesmo: um malware liberado pode virar incidente, e um programa bloqueado gera um chamado. A regra da aula fixa um alvo de recall sem olhar custo. O resultado mostra o lado ruim de minimizar só o custo: com 10:1 o modelo bloqueia 82% dos softwares legítimos, o que seria inviável na operação. A sensibilidade mostra que até com custos iguais o ótimo (0,24) fica abaixo de 0,37, porque malware é a maioria da base, e que a decisão depende muito de uma razão de custo que precisa vir do negócio e da capacidade do SOC, não do modelo.
 
 ## Tabela antes × depois (conjunto de teste)
