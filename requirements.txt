@@ -1,0 +1,33 @@
+# requirements.txt — IA para Cibersegurança (CESAR School, 2026.2)
+#
+# Versões realmente instaladas no ambiente que reproduz os notebooks.
+# O scikit-learn 1.9.1 reproduz exatamente os resultados do notebook da aula 5
+# (baseline: limiar 0,37 · PR-AUC 0,997 · ROC-AUC 0,973).
+#
+# O ambiente canônico é o Google Colab. Para fixar as versões de lá, rode no Colab:
+#     !pip freeze > requirements.txt
+
+# --- Núcleo científico (todos os notebooks) ---
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+
+# --- Dependências por notebook ---
+Pillow==12.3.0            # aula 2  — pré-processamento das imagens
+ucimlrepo==0.0.7          # aula 4  — UCI Phishing Websites (id 327)
+gdown==6.4.2              # aulas 3 e 6 — download de datasets do Google Drive
+networkx==3.7             # aula 6  — grafo do process mining
+imbalanced-learn==0.14.2  # experimentos de balanceamento
+xgboost==3.4.1            # experimentos de modelo
+
+# --- Pesadas / específicas (instaladas no Colab; versão conforme seu Python) ---
+# Deixadas sem pin: as versões reais vêm do Colab (pip freeze). Instale só se
+# for rodar o notebook correspondente localmente.
+tensorflow                # aula 2  — carrega o modelo .h5 do Teachable Machine
+tf-keras                  # aula 2  — compatibilidade Keras 2 sob TF novo
+torch                     # aula 1  — checagem de ambiente/GPU
+# pygraphviz              # aula 6  — visualização opcional do grafo (requer o Graphviz do sistema)
+
+# google-colab NÃO é instalável fora do Colab (drive.mount, files.download são só de lá).
