@@ -1,0 +1,52 @@
+# ──────────────────────────────────────────────────────────────
+# Bases de dados (grandes demais p/ o GitHub; origem fica no README)
+# ──────────────────────────────────────────────────────────────
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+*.csv
+*.parquet
+*.zip
+
+# Pastas de dataset extraídas
+MachineLearningCVE/
+cse2018/
+uci_malware_541/
+rps/
+rps-test-set/
+data/tm_treino/
+
+# Exports gerados pelos notebooks
+malware_features.csv
+
+# ──────────────────────────────────────────────────────────────
+# Modelos serializados regeneráveis (exceto o modelo da aula 2,
+# que é o alvo dos ataques da aula 10 e fica versionado)
+# ──────────────────────────────────────────────────────────────
+*.pkl
+*.joblib
+converted_keras.zip
+!models/modelo_aula2.h5
+
+# ──────────────────────────────────────────────────────────────
+# Material do professor (direitos do autor) — fica só no disco
+# ──────────────────────────────────────────────────────────────
+materiais/
+
+# ──────────────────────────────────────────────────────────────
+# Segredos e credenciais — nunca versionar
+# ──────────────────────────────────────────────────────────────
+.env
+*.pem
+*token*
+*secret*
+credentials*.json
+
+# ──────────────────────────────────────────────────────────────
+# Jupyter / Python
+# ──────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+__pycache__/
+*.pyc

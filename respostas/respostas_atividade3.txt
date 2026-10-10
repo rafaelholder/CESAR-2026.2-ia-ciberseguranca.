@@ -1,0 +1,34 @@
+Atividade 3 — Dados e features (CIC-IDS2017)
+Aluno: Rafael Holder de Oliveira
+Repositório: https://github.com/rafaelholder/CESAR-2026.2-ia-ciberseguranca
+
+1. Valores infinitos
+Flow Bytes/s e Flow Packets/s são taxas divididas pela duração do fluxo; com duração zero
+ou quase zero, a divisão estoura para infinito. Não dá para mantê-los porque o scikit-learn
+recusa a entrada e qualquer média ou padronização vira inf/NaN. Substituí pelo maior valor
+finito (2,07 bilhões de bytes/s), preservando o registro.
+
+2. Duplicatas e ausentes
+Encontrei 308.381 duplicatas (10,9% da base). Cópias do mesmo ataque fazem o modelo
+decorar aquele padrão e, se caem no treino e no teste, inflam a métrica (vazamento).
+Descartar NaN exige cuidado porque pode apagar ataques raros; no meu caso, o dropna
+tirou só 353 linhas, pois a maioria dos NaN já estava em duplicatas.
+
+3. Desbalanceamento (EDA)
+83,1% dos fluxos são BENIGN, então um modelo que chama tudo de benigno acerta 83%
+sem detectar nenhum ataque. Alguns ataques são raríssimos: na amostra, Heartbleed teve
+1 exemplo e Sql Injection 2. O gráfico "Benigno vs. Ataque" e o value_counts() revelam isso
+antes do treino.
+
+4. Normalização
+O K-Means usa distância euclidiana: Flow Bytes/s chega a 2,07 bilhões e SYN Flag Count vai
+só de 0 a 1, então a feature de maior escala domina a distância e define os grupos.
+Padronizar coloca todas na mesma régua. O Random Forest não sofre com isso porque
+cada divisão compara uma única feature com um limiar, e mudar a escala não muda a
+ordem dos valores.
+
+5. Comparar uma feature
+No boxplot de Total Fwd Packets, o PortScan quase sempre tem 1 pacote por fluxo,
+enquanto o benigno fica entre 2 e 4, então a feature separa bem esse ataque. Já DDoS e
+BENIGN se sobrepõem, o que mostra que ela sozinha não basta e precisa ser combinada
+com outras.
